@@ -16,6 +16,7 @@ const FoodTabs = withStyles({
 const FoodTab = withStyles((theme) => ({
   root: {
     fontSize: 12,
+    minWidth: 0,
     fontWeight: theme.typography.fontWeightMedium,
     "&:hover": {
       color: deepOrange[500],
@@ -37,8 +38,7 @@ const FoodTab = withStyles((theme) => ({
 export default function FoodTabArea({ index, setIndex }) {
   return (
     <FoodTabs
-      variant={"fullWidth"}
-      centered
+      variant="fullWidth"
       value={index}
       onChange={(e, val) => setIndex(val)}
     >

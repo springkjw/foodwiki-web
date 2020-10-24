@@ -12,6 +12,10 @@ import { grey } from "@material-ui/core/colors";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
 
+import FoodInfo from "./Info";
+import FoodCorona from "./Corona";
+import FoodToilet from "./Toilet";
+import FoodPhoto from "./Photo";
 import FoodCarousel from "./Carousel";
 import FoodTabArea from "./Tab";
 
@@ -74,6 +78,28 @@ export default function Detail() {
       { id: 6, name: "기념일" },
       { id: 7, name: "빈티지" },
       { id: 8, name: "예약제" },
+    ],
+    photos: [
+      {
+        id: 1,
+        url: "https://material-ui.com/static/images/grid-list/morning.jpg",
+      },
+      {
+        id: 2,
+        url: "https://material-ui.com/static/images/grid-list/morning.jpg",
+      },
+      {
+        id: 3,
+        url: "https://material-ui.com/static/images/grid-list/morning.jpg",
+      },
+      {
+        id: 4,
+        url: "https://material-ui.com/static/images/grid-list/morning.jpg",
+      },
+      {
+        id: 5,
+        url: "https://material-ui.com/static/images/grid-list/morning.jpg",
+      },
     ],
   };
 
@@ -166,6 +192,11 @@ export default function Detail() {
       </Paper>
 
       <FoodTabArea index={index} setIndex={setIndex} />
+
+      {index === 0 ? <FoodInfo /> : null}
+      {index === 1 ? <FoodCorona /> : null}
+      {index === 2 ? <FoodToilet /> : null}
+      {index === 3 ? <FoodPhoto photos={data.photos} /> : null}
     </React.Fragment>
   );
 }
