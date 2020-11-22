@@ -1,30 +1,34 @@
-import React, { useState } from "react";
 import {
-  Container,
-  Typography,
   Box,
-  Grid,
   ButtonBase,
+  Container,
+  Grid,
   Paper,
+  Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import ModeCommentIcon from "@material-ui/icons/ModeComment";
+import React, { useState } from "react";
 
-import FoodInfo from "./Info";
-import FoodCorona from "./Corona";
-import FoodToilet from "./Toilet";
-import FoodPhoto from "./Photo";
+import { Back } from "../../components";
 import FoodCarousel from "./Carousel";
+import FoodCorona from "./Corona";
+import FoodInfo from "./Info";
+import FoodInterior from "./Interior";
+import FoodMenu from "./Menu";
+import FoodPhoto from "./Photo";
 import FoodTabArea from "./Tab";
+import FoodToilet from "./Toilet";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import { grey } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: 30,
-    paddingBottom: 20,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    marginTop: -20,
+    zIndex: 50,
   },
   content: {
     paddingLeft: 20,
@@ -32,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tagList: {
     marginTop: 20,
+    marginBotom: 15,
   },
   tag: {
     marginRight: 5,
@@ -41,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Detail() {
   const classes = useStyles();
   const [index, setIndex] = useState(0);
+  const history = useHistory();
 
   const data = {
     images: [
@@ -68,7 +74,6 @@ export default function Detail() {
     name: "로우파이테이블",
     place: "서울 용산",
     viewCount: 13928,
-    commentCount: 392,
     tags: [
       { id: 1, name: "서울역데이터" },
       { id: 2, name: "서울역맛집" },
@@ -104,7 +109,11 @@ export default function Detail() {
   };
 
   return (
-    <React.Fragment>
+    <Grid
+      style={{ position: "relative", display: "flex", flexDirection: "column" }}
+    >
+      <Back onClick={() => history.goBack()} />
+
       <FoodCarousel images={data.images} />
 
       <Paper className={classes.container} square>
@@ -117,7 +126,7 @@ export default function Detail() {
           >
             <Grid item>
               <Typography variant="h5" component="h2">
-                <Box fontWeight={900} fontSize={18}>
+                <Box fontWeight={700} fontSize={18}>
                   {data.name}
                 </Box>
               </Typography>
@@ -138,24 +147,6 @@ export default function Detail() {
                     <Typography>
                       <Box fontWeight={500} fontSize={11} color={grey[400]}>
                         {data.viewCount.toLocaleString()}
-                      </Box>
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-                <Grid item>
-                  <Grid container direction="row" alignItems="center">
-                    <ModeCommentIcon
-                      style={{
-                        fontSize: 11,
-                        color: grey[400],
-                        marginRight: 5,
-                        marginTop: -2,
-                      }}
-                    />
-                    <Typography>
-                      <Box fontWeight={500} fontSize={11} color={grey[400]}>
-                        {data.commentCount.toLocaleString()}
                       </Box>
                     </Typography>
                   </Grid>
@@ -189,14 +180,16 @@ export default function Detail() {
             ))}
           </Grid>
         </Container>
-      </Paper>
 
-      <FoodTabArea index={index} setIndex={setIndex} />
+        <FoodTabArea index={index} setIndex={setIndex} />
+      </Paper>
 
       {index === 0 ? <FoodInfo /> : null}
       {index === 1 ? <FoodCorona /> : null}
-      {index === 2 ? <FoodToilet /> : null}
-      {index === 3 ? <FoodPhoto photos={data.photos} /> : null}
-    </React.Fragment>
+      {index === 2 ? <FoodMenu /> : null}
+      {index === 3 ? <FoodToilet /> : null}
+      {index === 4 ? <FoodInterior /> : null}
+      {index === 5 ? <FoodPhoto photos={data.photos} /> : null}
+    </Grid>
   );
 }

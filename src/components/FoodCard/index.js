@@ -1,27 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
+  Box,
+  ButtonBase,
   Card,
-  CardMedia,
   CardActionArea,
   CardActions,
   CardContent,
-  Typography,
-  Box,
-  ButtonBase,
+  CardMedia,
   Grid,
+  Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
+import PropTypes from "prop-types";
+import React from "react";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import { grey } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 320,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    borderRadius: 10,
     boxShadow: "none",
   },
   media: {
@@ -30,10 +30,13 @@ const useStyles = makeStyles((theme) => ({
   content: {
     padding: 0,
     paddingTop: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   actions: {
-    paddingLeft: 0,
-    paddingRight: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
   },
 }));
 
@@ -68,7 +71,7 @@ export default function FoodCard(props) {
 
             <Grid item>
               <Grid container direction="row">
-                <Grid item style={{ marginRight: 10 }}>
+                <Grid item>
                   <Grid container direction="row" alignItems="center">
                     <VisibilityIcon
                       style={{
@@ -81,24 +84,6 @@ export default function FoodCard(props) {
                     <Typography>
                       <Box fontWeight={500} fontSize={11} color={grey[400]}>
                         {viewCount.toLocaleString()}
-                      </Box>
-                    </Typography>
-                  </Grid>
-                </Grid>
-
-                <Grid item>
-                  <Grid container direction="row" alignItems="center">
-                    <ModeCommentIcon
-                      style={{
-                        fontSize: 11,
-                        color: grey[400],
-                        marginRight: 5,
-                        marginTop: -2,
-                      }}
-                    />
-                    <Typography>
-                      <Box fontWeight={500} fontSize={11} color={grey[400]}>
-                        {commentCount.toLocaleString()}
                       </Box>
                     </Typography>
                   </Grid>
@@ -119,7 +104,7 @@ export default function FoodCard(props) {
           <Grid item key={tag.id}>
             <ButtonBase>
               <Typography>
-                <Box fontWeight={500} fontSize={13} color={grey[600]}>
+                <Box fontWeight={400} fontSize={13} color={grey[600]}>
                   {`#${tag.name}`}
                 </Box>
               </Typography>

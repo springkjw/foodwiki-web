@@ -1,5 +1,6 @@
+import Back from "./Back";
 import FoodCard from "./FoodCard";
-import ResponsiveImage from "./ResponsiveImage";
 import Info from "./Info";
+import ResponsiveImage from "./ResponsiveImage";
 
-export { FoodCard, ResponsiveImage, Info };
+export { Back, FoodCard, ResponsiveImage, Info };

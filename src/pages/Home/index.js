@@ -1,23 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
   AppBar,
-  Toolbar,
-  GridList,
-  GridListTile,
   Container,
-  Slide,
-  useScrollTrigger,
   CssBaseline,
   Grid,
-  Button,
-  Typography,
-  Box,
+  GridList,
+  GridListTile,
+  Slide,
+  Toolbar,
+  useScrollTrigger,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { deepOrange } from "@material-ui/core/colors";
+import { Logo, Marker } from "../../assets";
+
 import { FoodCard } from "../../components";
-import { Logo } from "../../assets";
+import PropTypes from "prop-types";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,18 +29,20 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 15,
   },
+  marker: {
+    width: 10,
+    marginRight: 5,
+  },
   container: {
     marginTop: 60,
   },
   region: {
-    height: 30,
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: deepOrange[500],
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 0,
-    paddingBottom: 0,
+    fontSize: 14,
+    color: "#F95C29",
+    fontWeight: 700,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 }));
 
@@ -82,17 +81,11 @@ export default function Home() {
               className={classes.header}
             >
               <img src={Logo} className={classes.logo} />
-              <Button
-                aria-haspopup="true"
-                variant="outlined"
-                className={classes.region}
-              >
-                <Typography>
-                  <Box fontSize={14} fontWeight={900} color={deepOrange[500]}>
-                    경기도 성남시
-                  </Box>
-                </Typography>
-              </Button>
+
+              <div className={classes.region}>
+                <img src={Marker} className={classes.marker} />
+                <span>서울</span>
+              </div>
             </Grid>
           </Toolbar>
         </AppBar>

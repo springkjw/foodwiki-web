@@ -1,8 +1,8 @@
-import React from "react";
-import { Typography, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box, Typography } from "@material-ui/core";
 
 import { Info } from "../../components";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,9 @@ export default function FoodCorona() {
       <Info label="직원 위생">
         <Typography>
           <Box fontWeight={400} fontSize={11}>
-            마스크착용ㆍ장갑착용ㆍ헤어캡착용
+            {"마스크 착용\n헤어캡 착용".split("\n").map((str, i) => (
+              <p key={i}>{str}</p>
+            ))}
           </Box>
         </Typography>
       </Info>
@@ -27,7 +29,11 @@ export default function FoodCorona() {
       <Info label="손님 위생">
         <Typography>
           <Box fontWeight={400} fontSize={11}>
-            입장 시 마스크착용 필수ㆍ손소독제 비치ㆍ발열체크
+            {"입장 시 마스크 착용 필수\n손 소독제 비치"
+              .split("\n")
+              .map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
           </Box>
         </Typography>
       </Info>
@@ -35,7 +41,9 @@ export default function FoodCorona() {
       <Info label="내부 시설">
         <Typography>
           <Box fontWeight={400} fontSize={11}>
-            QR코드입장ㆍ소독ㆍ거리두기ㆍ카드직접결제
+            {"카드 직접 결제".split("\n").map((str, i) => (
+              <p key={i}>{str}</p>
+            ))}
           </Box>
         </Typography>
       </Info>
@@ -43,7 +51,9 @@ export default function FoodCorona() {
       <Info label="테이크아웃">
         <Typography>
           <Box fontWeight={400} fontSize={11}>
-            테이크아웃 불가ㆍ배달 불가
+            {"불가능".split("\n").map((str, i) => (
+              <p key={i}>{str}</p>
+            ))}
           </Box>
         </Typography>
       </Info>

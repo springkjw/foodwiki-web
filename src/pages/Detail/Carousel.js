@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { GridList, GridListTile } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
+import PropTypes from "prop-types";
+import React from "react";
 import { ResponsiveImage } from "../../components";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
+    height: 280,
+    zIndex: 1,
   },
   gridList: {
     flexWrap: "nowrap",
@@ -25,14 +27,14 @@ export default function FoodCarousel({ images }) {
   return (
     <div className={classes.root}>
       <GridList
-        cellHeight={260}
+        cellHeight={280}
         className={classes.gridList}
         rows={1}
         spacing={0}
       >
         {images.map((image, index) => (
           <GridListTile key={index}>
-            <ResponsiveImage url={image.url} ratio={1.4} height={260} />
+            <ResponsiveImage url={image.url} ratio={1.4} height={280} />
           </GridListTile>
         ))}
       </GridList>

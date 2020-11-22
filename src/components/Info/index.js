@@ -1,8 +1,9 @@
-import React from "react";
+import { Box, Grid, Typography } from "@material-ui/core";
+
 import PropTypes from "prop-types";
-import { Grid, Typography, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import { grey } from "@material-ui/core/colors";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,14 +25,14 @@ export default function Info({ label, children }) {
   return (
     <React.Fragment>
       <Grid container direction="row" className={classes.root}>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Typography>
             <Box fontWeight={600} fontSize={12}>
               {label}
             </Box>
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           {children}
         </Grid>
       </Grid>

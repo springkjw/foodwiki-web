@@ -1,8 +1,9 @@
-import React from "react";
+import { Tab, Tabs } from "@material-ui/core";
+
 import PropTypes from "prop-types";
-import { Tabs, Tab } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import React from "react";
 import { deepOrange } from "@material-ui/core/colors";
+import { withStyles } from "@material-ui/core/styles";
 
 const FoodTabs = withStyles({
   indicator: {
@@ -10,13 +11,15 @@ const FoodTabs = withStyles({
     justifyContent: "center",
     backgroundColor: deepOrange[500],
     height: 1,
+    backgroundColor: "white",
   },
 })((props) => <Tabs {...props} />);
 
 const FoodTab = withStyles((theme) => ({
   root: {
     fontSize: 12,
-    minWidth: 0,
+    minWidth: 80,
+    backgroundColor: "white",
     fontWeight: theme.typography.fontWeightMedium,
     "&:hover": {
       color: deepOrange[500],
@@ -33,19 +36,25 @@ const FoodTab = withStyles((theme) => ({
   selected: {
     color: deepOrange[500],
   },
-}))((props) => <Tab disableRipple {...props} />);
+}))((props) => {
+  return <Tab role="tabpanel" {...props} />;
+});
 
 export default function FoodTabArea({ index, setIndex }) {
   return (
     <FoodTabs
-      variant="fullWidth"
+      variant="scrollable"
+      scrollButtons="off"
       value={index}
       onChange={(e, val) => setIndex(val)}
     >
-      <FoodTab label="식당 정보" />
-      <FoodTab label="COVID-19" />
+      <FoodTab label="운영" />
+      <FoodTab label="코로나" />
+      <FoodTab label="메뉴" />
       <FoodTab label="화장실" />
-      <FoodTab label="사진 15장" />
+      <FoodTab label="내부" />
+      <FoodTab label="서비스" />
+      <FoodTab label="사진" />
     </FoodTabs>
   );
 }
