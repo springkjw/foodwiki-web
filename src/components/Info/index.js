@@ -26,11 +26,11 @@ export default function Info({ label, children }) {
     <React.Fragment>
       <Grid container direction="row" className={classes.root}>
         <Grid item xs={4}>
-          <Typography>
-            <Box fontWeight={600} fontSize={12}>
+          <Box fontWeight={600}>
+            <Typography style={{ fontSize: 12, fontWeight: "bold" }}>
               {label}
-            </Box>
-          </Typography>
+            </Typography>
+          </Box>
         </Grid>
         <Grid item xs={8}>
           {children}

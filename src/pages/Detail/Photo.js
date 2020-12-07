@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
     width: 110,
     height: 110,
     backgroundColor: grey[400],
+    objectFit: "cover",
+    objectPosition: "center",
   },
 }));
 
@@ -37,8 +39,8 @@ export default function FoodPhoto({ photos }) {
           className={classes.gridList}
         >
           {photos.map((photo, index) => (
-            <GridListTile key={photo.id}>
-              <img src={photo.url} className={classes.photo} />
+            <GridListTile key={index}>
+              <img src={photo} className={classes.photo} />
             </GridListTile>
           ))}
         </GridList>

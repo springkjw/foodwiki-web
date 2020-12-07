@@ -12,8 +12,10 @@ import {
 import { Logo, Marker } from "../../assets";
 
 import { FoodCard } from "../../components";
+import { axios } from "../../utils";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useMemo } from "react";
+import { useSWRInfinite } from "swr";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -67,11 +69,39 @@ HideOnScroll.propTypes = {
 export default function Home() {
   const classes = useStyles();
 
+  const getKey = (pageIndex, previousPageData) => {
+    if (previousPageData && !previousPageData.results) {
+      return null;
+    }
+
+    if (pageIndex === 0) {
+      return "/shop/?limit=10";
+    }
+
+    return `/shop/?limit=10&offset=${previousPageData.next}`;
+  };
+  const fetcher = async (url) => {
+    const res = await axios.get(url);
+    return res.data;
+  };
+  const { data, size, setSize } = useSWRInfinite(getKey, fetcher);
+  const items = useMemo(() => {
+    let it = [];
+
+    if (data) {
+      data.map((d) => {
+        it = [...it, ...d];
+      });
+    }
+
+    return it;
+  }, [data]);
+
   return (
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll>
-        <AppBar color="white" className={classes.root}>
+        <AppBar color="default" className={classes.root}>
           <Toolbar variant="dense">
             <Grid
               container
@@ -92,17 +122,19 @@ export default function Home() {
       </HideOnScroll>
 
       <Toolbar />
-      <Container className={classes.container}>
-        <GridList cellHeight="auto" cols={1} spacing={25}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((foods, index) => (
-            <GridListTile key={index}>
-              <Grid container justify="center" alignItems="center">
-                <FoodCard />
-              </Grid>
-            </GridListTile>
-          ))}
-        </GridList>
-      </Container>
+      {items ? (
+        <Container className={classes.container}>
+          <GridList cellHeight="auto" cols={1} spacing={25}>
+            {items.map((item, index) => (
+              <GridListTile key={index}>
+                <Grid container justify="center" alignItems="center">
+                  <FoodCard data={item} />
+                </Grid>
+              </GridListTile>
+            ))}
+          </GridList>
+        </Container>
+      ) : null}
     </React.Fragment>
   );
 }

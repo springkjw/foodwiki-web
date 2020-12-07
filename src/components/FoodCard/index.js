@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import ModeCommentIcon from "@material-ui/icons/ModeComment";
 import PropTypes from "prop-types";
 import React from "react";
 import VisibilityIcon from "@material-ui/icons/Visibility";
@@ -37,11 +36,14 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 }));
 
-export default function FoodCard(props) {
-  const { id, name, place, image, tags, viewCount, commentCount } = props;
+export default function FoodCard({ data }) {
+  const { id, name, place, image, tags, views } = data;
 
   const classes = useStyles();
   const { push } = useHistory();
@@ -83,7 +85,7 @@ export default function FoodCard(props) {
                     />
                     <Typography>
                       <Box fontWeight={500} fontSize={11} color={grey[400]}>
-                        {viewCount.toLocaleString()}
+                        {views ? views.toLocaleString() : 0}
                       </Box>
                     </Typography>
                   </Grid>
@@ -100,43 +102,23 @@ export default function FoodCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.actions}>
-        {tags.map((tag) => (
-          <Grid item key={tag.id}>
-            <ButtonBase>
-              <Typography>
-                <Box fontWeight={400} fontSize={13} color={grey[600]}>
-                  {`#${tag.name}`}
-                </Box>
-              </Typography>
-            </ButtonBase>
-          </Grid>
-        ))}
+        {tags &&
+          tags.map((tag) => (
+            <Grid item key={tag.id}>
+              <ButtonBase>
+                <Typography>
+                  <Box fontWeight={400} fontSize={13} color={grey[600]}>
+                    {`#${tag.name}`}
+                  </Box>
+                </Typography>
+              </ButtonBase>
+            </Grid>
+          ))}
       </CardActions>
     </Card>
   );
 }
 
 FoodCard.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  place: PropTypes.string,
-  image: PropTypes.string,
-  tags: PropTypes.array,
-  viewCount: PropTypes.number,
-  commentCount: PropTypes.number,
-};
-
-FoodCard.defaultProps = {
-  id: 10,
-  name: "로우파이테이블",
-  place: "서울 용산",
-  image: "https://material-ui.com/static/images/cards/paella.jpg",
-  tags: [
-    { id: 1, name: "서울역데이터" },
-    { id: 2, name: "서울역맛집" },
-    { id: 3, name: "라구맛집" },
-    { id: 4, name: "인스타감성" },
-  ],
-  viewCount: 13928,
-  commentCount: 392,
+  data: PropTypes.object,
 };

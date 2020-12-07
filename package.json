@@ -8,18 +8,22 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
+    "swr": "^0.3.9",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://foodwiki-web --profile=artifarmer",
+    "invalidate": "aws cloudfront create-invalidation --profile=artifarmer --distribution-id E3M2TPIZHY1NIQ --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "browserslist": {
     "production": [

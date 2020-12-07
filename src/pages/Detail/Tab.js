@@ -40,7 +40,7 @@ const FoodTab = withStyles((theme) => ({
   return <Tab role="tabpanel" {...props} />;
 });
 
-export default function FoodTabArea({ index, setIndex }) {
+export default function FoodTabArea({ index, setIndex, tabs }) {
   return (
     <FoodTabs
       variant="scrollable"
@@ -48,13 +48,9 @@ export default function FoodTabArea({ index, setIndex }) {
       value={index}
       onChange={(e, val) => setIndex(val)}
     >
-      <FoodTab label="운영" />
-      <FoodTab label="코로나" />
-      <FoodTab label="메뉴" />
-      <FoodTab label="화장실" />
-      <FoodTab label="내부" />
-      <FoodTab label="서비스" />
-      <FoodTab label="사진" />
+      {tabs.map((tab, i) => (
+        <FoodTab key={i} label={tab} />
+      ))}
     </FoodTabs>
   );
 }
@@ -62,4 +58,5 @@ export default function FoodTabArea({ index, setIndex }) {
 FoodTabArea.propTypes = {
   index: PropTypes.number,
   setIndex: PropTypes.func,
+  tabs: PropTypes.array,
 };
